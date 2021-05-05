@@ -82,10 +82,12 @@
 
     p {
       color: #FFFFFF;
+      font-size: 1.2em;
     }
 
     b {
       color: #FFFFFF;
+      font-size: 1.2em;
     }
 
     span {
@@ -117,10 +119,12 @@
 
     ol {
       color: #FFFFFF;
+      font-size: 1.2em;
     }
 
     ul {
       color: #FFFFFF;
+      font-size: 1.2em;
     }
   </style>
 
@@ -169,7 +173,14 @@
         <li>Membership of user</li>
         <li>Bike Type</li>
       </ul>
-      <br>
+      <p>
+        The data visulalized is from January to April of 2021. We combined the Capital Bikeshare data with land use
+        data from the Washington DC data portal. We then calculated total trip times from the start and end times. The
+        trips latitude and longitude points were used trip distances and find what land use cluster related to a
+        trips start and end locations. The data has been cleaned by removing trips with null values and trips that were
+        started on accident. These accidental trips were identified by finding trips under 2 mins long and had a length
+        of under 200m.
+      </p>
       <p><b>By analyzing and visualizing the data we are trying to answer the following questions:</b></p>
       <ol>
         <li> DC Capital Bikeshare has an annual membership tier for frequent riders and locals. How does this membership
