@@ -22,7 +22,7 @@ d3.json('data/assignment_3/land_use_boundary.geojson', function (error, land_use
                     return {
                         color: "rgb(0, 255, 0)"
                     };
-                case 'Open Air':
+                case 'Open/Public':
                     return {
                         color: "rgb(255, 0, 255)"
                     };
