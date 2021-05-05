@@ -196,3 +196,8 @@ if __name__ == "__main__":
     casual_cluster_df = pd.DataFrame(casual_cluster)
     casual_cluster_df.to_csv(
         'data/assignment_3/casual_cluster_matrix.csv', index=False, header=False)
+
+    # Adhoc Requests
+    # Agg of trip starts/ends by land use
+    df_2021.groupby(['start_land_cluster', 'member_casual']).count()['ride_id'].to_csv('~/Downloads/trips_start.csv')
+    df_2021.groupby(['end_land_cluster', 'member_casual']).count()['ride_id'].to_csv('~/Downloads/trips_end.csv')

@@ -88,6 +88,10 @@
       color: #FFFFFF;
     }
 
+    span {
+      color: #000000
+    }
+
     A:link {
       COLOR: white;
       TEXT-DECORATION: none;
@@ -112,6 +116,10 @@
     }
 
     ol {
+      color: #FFFFFF;
+    }
+
+    ul {
       color: #FFFFFF;
     }
   </style>
@@ -149,7 +157,25 @@
     <div class="twelve columns">
       <h3>Introduction</h3>
       <p>
-        How does rider membership impact the use of the bike share system for commuting and non-commuting?
+        The webpage presents visualized data from the bike sharing system in Washington DC.
+        Capital Bike share is the mainstay for the bike sharing service in the city with more than
+        4500 bikes and 596 stations across the metro region of Washington,DC. The data was
+        obtained from the Website of Capitalbike share <a href="https://www.capitalbikeshare.com">
+          https://www.capitalbikeshare.com</a>. The data incorporates several layers of information:
+      </p>
+      <ul>
+        <li>Bike IDs</li>
+        <li>Time/Location data</li>
+        <li>Membership of user</li>
+        <li>Bike Type</li>
+      </ul>
+      <br>
+      <p><b>By analyzing and visualizing the data we are trying to answer the following questions:</b></p>
+      <ol>
+        <li>How does rider membership impact the user of bike share system for commuting and non-commuting?</li>
+        <li>Do the travel patterns change based on membership or casual trips?</li>
+        <li>Does having a membership change the area that users start their trip?</li>
+      </ol>
       </p>
     </div>
   </div>
@@ -158,13 +184,22 @@
   <div class="container one-bottom">
     <div class="twelve columns">
       <h3>How does rider membership impact the use of the bike share system for commuting and non-commuting?</h3>
+      <p>Ride distance and time are average over a 24 hour day for the first 4 months of 2021.</p>
       <div id="distance_plot"></div>
       <div id="time_plot"></div>
       <h4>
         Findings
       </h4>
       <p>
-        ...
+        First of all, we can see two peaks existing in the ridership of the members both in the first and second graph.
+        That means most of the member users are using the bike sharing service for daily commuting,
+        which causes the volume of the usage to rise at rush hours of the day.
+        In addition, there is a distinct difference of ridership between members and casual users.
+        Member users have a longer distance of rides but a much lower duration than the casual users do for
+        almost the entire range of times. There are two possible reasons behind this.
+        First, member users ride faster than the casual users because the member users are usually in
+        a hurry to work or go home. Second, since casual users are using bikes for leisure purposes,
+        they may take a circular tour path, which leads to a longer time and shorter start-end distances.
       </p>
     </div>
   </div>
@@ -173,30 +208,31 @@
   <div class="container one-bottom">
     <div class="twelve columns">
       <h3>How do commuting patterns change based on membership?</h3>
-      <!-- TODO: Heat Visulization -->
+      <p>Start and stop locations are plotted in this heat map. Buttons allow you to change your view between morning
+        (6am-10am) and evening(5pm-8pm) commute times. Data is from January 2021 - April 2021.</p>
       <button onclick="update_heat('morning')">Morning Coummute</button>
       <button onclick="update_heat('evening')">Evening Commute</button>
-      <h4>Start Locations</h4>
+      <h4>Trip Start Locations</h4>
       <div class="row">
         <div class="six columns">
-          <h5>Member</h5>
+          <h5>User's that have a membership</h5>
           <div id="member_start_map"></div>
         </div>
         <div class="six columns">
-          <h5>Casual</h5>
+          <h5>Casual Users</h5>
           <div id="casual_start_map"></div>
         </div>
       </div>
       <div class="row">
         <br>
-        <h4>End Locations </h4>
+        <h4>Trip End Locations </h4>
         <div class="row">
           <div class="six columns">
-            <h5>Member</h5>
+            <h5>User's that have a membership</h5>
             <div id="member_end_map"></div>
           </div>
           <div class="six columns">
-            <h5>Casual</h5>
+            <h5>Casual Users</h5>
             <div id="casual_end_map"></div>
           </div>
         </div>
@@ -204,6 +240,13 @@
         <h4>
           Findings
         </h4>
+        <p>
+          The heat maps show the start and the end locations for the bike share system for morning
+          and evening commutes to analyse the travel patterns.
+          Start and End locations for the members do not vary as bikes are used to commute to work
+          and back, while the start and end locations for the casual riders change for both morning
+          and evening commute concentrating over the leisure specialized places.
+        </p>
       </div>>
 
 
@@ -223,7 +266,9 @@
             </tr>
           </table>
           <br>
+          <h5>Washington D.C. Land Use Map </h5>
           <div id="land_use_map"></div>
+          <br><br>
           <div class="row">
             <div class="six columns">
               <h4>Members</h4>
@@ -236,24 +281,67 @@
           </div>
           <h4>
             Findings
-            
-            A total of 256438 trips have been registered in 2019. Trips made from and to each land use area are described as below:
-               - Commercial (30.32%) Mixed-use (51.78%) National Mall (9.88%) Open/Public (3.31%) Residential (4.71%).
-               - Trips related to registered members represent 65.48 % of the overall trips. The share of registered members based on land use types are as follow:
-               - Commercial (65.48%) Mixed-use (72.76%) National Mall (32.87%) Open Air (53.97%) Residential (63.53%).
-            
-            Here are some other features that can be visualized by using both the land use map and the chord graphs:
-               -	Trips from mixed-use zone (for both registered members and casual users) are essentially made within the mixed-use zone and to commercial areas and the National Mall area.
-               -	Compared to casual users, registered users traveled more within the mixed-use.
-               -	There are fewer trips to the open and public areas (lake, river, canal, not yet developed areas, etc.)
-               -	No trip to residential areas for both casual and registered users. So, they either live in the mixed-use areas or use CABI for their first or last mile.
-               -	No trip within the residential areas. This could be explained by the very few available stations in these areas.
-               -	Important number of trips from mixed-use to commercial areas. This could be also explained by the fact that commercial zones are coupled with institutional, office, industrial areas.
-               -	Trips from commercial areas are exclusively within the same zones.
-               -	One big difference between registered and casual users is the number of trips within and from the National Mall area. This is explained by the fact that this area attracts a lot of tourists, potential casual users.
-
-
           </h4>
+          <ul>
+            <li>A total of 256,438 trips have been registered in 2019.</li>
+            <li>Trips made from and to each land use area are described as below:
+              <ul>
+                <li><span style="background-color: rgb(255, 0, 0)">Commercial (30.32%)</span></li>
+                <li>
+                  <td><span style="background-color: rgb(26, 255, 255)">Mixed-use (51.78%)</span></td>
+                </li>
+                <li>
+                  <td><span style="background-color: rgb(0, 255, 0)">National Mall (9.88%)</span></td>
+                </li>
+                <li>
+                  <td><span style="background-color: rgb(255, 0, 255)">Open/Public (3.31%)</span></td>
+                </li>
+                <li>
+                  <td><span style="background-color: rgb(255, 255, 0)">Residential (4.71%)</span></td>
+                </li>
+              </ul>
+            </li>
+            <li>Trips related to registered members represent 65.48 % of the overall trips. The share of registered
+              members based on land use types are as follow:
+              <ul>
+                <li>
+                  <td><span style="background-color: rgb(255, 0, 0)">Commercial (65.48%)</span></td>
+                </li>
+                <li>
+                  <td><span style="background-color: rgb(26, 255, 255)">Mixed-use (72.76%)</span></td>
+                </li>
+                <li>
+                  <td><span style="background-color: rgb(0, 255, 0)">National Mall (32.87%)</span></td>
+                </li>
+                <li>
+                  <td><span style="background-color: rgb(255, 0, 255)">Open Air (53.97%)</span></td>
+                </li>
+                <li>
+                  <td><span style="background-color: rgb(255, 255, 0)">Residential (63.53%)</span></td>
+                </li>
+              </ul>
+            </li>
+            <li>Here are some other features that can be visualized by using both the land use map and the chord graphs:
+            </li>
+            <li>Trips from mixed-use zone (for both registered members and casual users) are essentially made within the
+              mixed-use zone and to commercial areas and the National Mall area.</li>
+            <li>Compared to casual users, registered users traveled more within the mixed-use.</li>
+            <li>There are fewer trips to the open and public areas (lake, river, canal, not yet developed areas, etc.)
+            </li>
+            <li>No trip to residential areas for both casual and registered users. So, they either live in the
+              mixed-use
+              areas or use CABI for their first or last mile.</li>
+            <li>No trip within the residential areas. This could be explained by the very few available stations in
+              these
+              areas.</li>
+            <li>Important number of trips from mixed-use to commercial areas. This could be also explained by the fact
+              that commercial zones are coupled with institutional, office, industrial areas.</li>
+            <li>Trips from commercial areas are exclusively within the same zones.</li>
+            <li>One big difference between registered and casual users is the number of trips within and from the
+              National
+              Mall area. This is explained by the fact that this area attracts a lot of tourists, potential casual
+              users.</li>
+          </ul>
         </div>
       </div>
 
@@ -261,14 +349,18 @@
       <div class="container one-bottom">
         <div class="twelve columns">
           <h3>Conclusion</h3>
-          <p>
-               -	Registered members commute for longer distances compared to casual users.
-               -  Casual users spend more time in commuting than registered users.
-               -  Both casual and registered users commute mostly on wednesday (between 4 PM and 6 PM for registered users and  between 2 PM and 4 PM for casual users).
-               -  High concentration areas of bicycling activities for both registered and casual users are located essentially in the city center and Columbia Heights area.
-               -  No trip to residential areas from other land use categories for both casual and registered users. 
-               - Casual users traveled more within the National Mall whereas registered users spend most of their trips within the mixed-use zone.
-          </p>
+          <ul>
+            <li>Registered members commute for longer distances compared to casual users.</li>
+            <li>Casual users spend more time in commuting than registered users.</li>
+            <li>Both casual and registered users commute mostly on wednesday (between 4 PM and 6 PM for registered
+              users
+              and between 2 PM and 4 PM for casual users).</li>
+            <li>High concentration areas of bicycling activities for both registered and casual users are located
+              essentially in the city center and Columbia Heights area.</li>
+            <li>No trip to residential areas from other land use categories for both casual and registered users.</li>
+            <li>Casual users traveled more within the National Mall whereas registered users spend most of their trips
+              within the mixed-use zone.</li>
+          </ul>
         </div>
       </div>
 
@@ -276,15 +368,26 @@
       <div class="container one-bottom">
         <h4>Team & Contributions</h4>
         <h5>Eric Helfrich</h5>
-        <p>...</p>
+        <ul>
+          <li>Helped design the narrative of the webpage and how to analyze the Captial Bikeshare data. </li>
+          <li>Wrote the majority of the HTML, CSS, Javascript, and Python used to create the website.</li>
+          <li>Created the D3 plots in JS using the CSV data created from the python scripts. </li>
+          <li>Wrote all the python code used to merge the bikeshare data, geoJSON, and GPS coordinate API</li>
+        </ul>
         <h5>Ling Xu</h5>
-        <p>...</p>
+        <p>
+          Created the land use cluster geoJSON file from arcGIS. Interpreted the results from question 1.
+        </p>
         <h5>Panick Kalambay Ilunga</h5>
-        <p>Came up with the findings related to Question 3 and analyzed the relationships and differences between the land use categories and trips made by registered members and casuals users by using the chord graphs and the land use map.
-           Analyzed the relationship between the number of trips and days for both registered and casual users
-           Edited in html the findings for Question 3 and wrote conclusion.</p>
+        <p>Came up with the findings related to Question 3 and analyzed the relationships and differences between the
+          land use categories and trips made by registered members and casuals users by using the chord graphs and the
+          land use map.
+          Analyzed the relationship between the number of trips and days for both registered and casual users
+          Edited in html the findings for Question 3 and wrote conclusion.</p>
         <h5>Khyati Patel</h5>
-        <p>...</p>
+        <p>
+          Wrote the introduction and interpreted the results from question 2.
+        </p>
       </div>
 
 
