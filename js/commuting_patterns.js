@@ -16,13 +16,13 @@ member_end_map
 
 var mem_start_heat = L.heatLayer([], {
     maxZoom: 12,
-    max: 3,
+    max: 1.5,
     radius: 10
 }).addTo(member_start_map);
 
 var mem_end_heat = L.heatLayer([], {
     maxZoom: 12,
-    max: 3,
+    max: 1.5,
     radius: 10
 }).addTo(member_end_map);
 
@@ -41,13 +41,13 @@ casual_end_map
 
 var casual_start_heat = L.heatLayer([], {
     maxZoom: 12,
-    max: 3,
+    max: 1.5,
     radius: 10
 }).addTo(casual_start_map);
 
 var casual_end_heat = L.heatLayer([], {
     maxZoom: 12,
-    max: 3,
+    max: 1.5,
     radius: 10
 }).addTo(casual_end_map);
 
