@@ -151,7 +151,7 @@
       <p>
         ARCH 6306/6050, DSBA 6010, ITIS 8010/6010: Wednesdays 6pm-8:30pm, Taught Online
         <br>
-        Team: Eric Helfrich, Ling Xu, Panick Kalambay Ilunga, Khyati Patel 
+        Team: Eric Helfrich, Ling Xu, Panick Kalambay Ilunga, Khyati Patel
         <br>
         Dr. Dimitris Papanikolaou | dpapanik@uncc.edu | Urban Synergetics Lab | https://urbansynergeticslab.net
       </p>
@@ -202,7 +202,15 @@
   <div class="container one-bottom">
     <div class="twelve columns">
       <h3>Aggregate time and distance changes based on rider membership</h3>
-      <p>Ride distance and time are average over a 24 hour day for the first 4 months of 2021.</p>
+      <p>
+        Travel time was calculated by subtracting the end time by the start time. Travel distance was calculated by
+        finding the distance between the start and end latitude/longitude points for each ride. This distance was simply
+        the cartesian distance between these points. The trips do not contain periodic GPS coordinates for the ride and
+        therefore we can get an accurate picture of the route the user chose for their trip. This leads to some
+        interesting results where we have trips that were checked out for long periods of time, but did not go anywhere.
+        These bikes were most likely checked out and then returned to the same station after the user took a circular
+        route.
+      </p>
       <div id="distance_plot"></div>
       <div id="time_plot"></div>
       <h4>
@@ -226,34 +234,68 @@
   <div class="container one-bottom">
     <div class="twelve columns">
       <h3>Membership has minimal impact on commuting patterns</h3>
-      <p>Start and stop locations are plotted in this heat map. Buttons allow you to change your view between morning
-        (6am-10am) and evening(5pm-8pm) commute times. Data is from January 2021 - April 2021.</p>
-      <button onclick="update_heat('morning')">Morning Coummute</button>
-      <button onclick="update_heat('evening')">Evening Commute</button>
-      <h4>Trip Start Locations</h4>
+      <p>
+        The data was split by commuting time to analyze patterns between the morning and evening commutes. This was done
+        by defining two time frames for the commuting times and then separating the rides into those bins. We defined 6
+        am to 10am as the morning commute and 5pm - 8pm as the evening commute. We filtered the data by these two times
+        and by their membership type and plotted them on a heat map. This heat map shows the start or end locations by
+        each of the combinations of start/end/membership type. We chose a heat map because it allowed us to capture the
+        trip locations that started or ended in a public bike rack in addition to the bikeshare stations. We expanded
+        the dimensionality of the heat map by allowing the commute time to be changed by two buttons. This will allow us
+        to view the heat maps for the morning commute and evening commute.
+      </p>
+      <h4>Heat Maps of trip endpoints by membership type</h4>
+      <p>The heat map matrix can change between showing the morning commute times and the evening commute times by using
+        the two buttons.</p>
+      <div class="center">
+
+        <button class="button-primary" onclick="update_heat('morning')">Morning Coummute</button>
+        <button class="button-primary" onclick="update_heat('evening')">Evening Commute</button>
+      </div>
       <div class="row">
-        <div class="six columns">
-          <h5>User's that have a membership</h5>
+        <div class="one-half column">
+          <h5 style="margin: 0;
+          width: 0;
+          white-space: nowrap;
+          position: absolute;
+          text-align: left;
+          transform-origin: bottom; 
+          margin-top: 280px;
+          transform: rotate(270deg);">
+            Members
+          </h5>
+        </div>
+        <div class="five columns">
+          <h5 class="center">Trip Starts</h5>
           <div id="member_start_map"></div>
         </div>
-        <div class="six columns">
-          <h5>Casual Users</h5>
+        <div class="five columns">
+          <h5 class="center">Trip Ends</h5>
+          <div id="member_end_map"></div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="one-half column">
+          <h5 style="margin: 0;
+          width: 0;
+          white-space: nowrap;
+          position: absolute;
+          text-align: left;
+          transform-origin: bottom; 
+          margin-top: 280px;
+          transform: rotate(270deg);">
+            Non-Members (Casual)
+          </h5>
+        </div>
+        <div class="five columns">
           <div id="casual_start_map"></div>
+        </div>
+        <div class="five columns">
+          <div id="casual_end_map"></div>
         </div>
       </div>
       <div class="row">
-        <br>
-        <h4>Trip End Locations </h4>
-        <div class="row">
-          <div class="six columns">
-            <h5>User's that have a membership</h5>
-            <div id="member_end_map"></div>
-          </div>
-          <div class="six columns">
-            <h5>Casual Users</h5>
-            <div id="casual_end_map"></div>
-          </div>
-        </div>
         <br>
         <h4>
           Findings
@@ -274,17 +316,27 @@
       <div class="container one-bottom">
         <div class="twelve columns">
           <h3>Membership changes how riders move between areas of Washington DC</h3>
-          <p>We clusted different regions of Washington DC based on their land use type. We then looked at how trips
-            flow between these different land use groups. This analysis is broken down by membership type.</p>
+          <p>
+            We used arcGIS to visualize the shape file of land use designations for DC. We found that the designations
+            were so fine grain that most bikes would be placed in the locations designated as roads. In order to get
+            information about the area the trips endpoints we manually grouped areas of DC by their most common land use
+            area. We did this manually by examining the current land use designations and drawing new shapes over the DC
+            map. We designated these new clusters as commercial, mixed use, open/public, residential, or the National
+            Mall. Each of these clusters were categorized based off of the most common land use designation in them. The
+            National Mall was a special class for open/public land as it is one of the most common tourist spots in DC
+            and encompasses a large portion of downtown DC. We then mapped each ride's start and end location to their
+            cluster and added it to our dataset. Since our data only included the District of Columbia we decided to
+            remove all trips that originate or terminated outside of DC for just the land use analysis.
+          </p>
           <h5>Land Use Categories: </h5>
           </p>
           <table style="width:100%">
             <tr>
-              <td><span style="background-color: rgb(255, 0, 0)">Commercial</span></td>
-              <td><span style="background-color: rgb(26, 255, 255)">Mix Used</span></td>
-              <td><span style="background-color: rgb(0, 255, 0)">National Mall</span></td>
-              <td><span style="background-color: rgb(255, 0, 255)">Open_Air</span></td>
-              <td><span style="background-color: rgb(255, 255, 0)">Residential</span></td>
+              <td><span style="color: rgb(255, 0, 0)">Commercial</span></td>
+              <td><span style="color: rgb(26, 255, 255)">Mix Used</span></td>
+              <td><span style="color: rgb(0, 255, 0)">National Mall</span></td>
+              <td><span style="color: rgb(255, 0, 255)">Open/Public</span></td>
+              <td><span style="color: rgb(255, 255, 0)">Residential</span></td>
             </tr>
           </table>
           <br>
@@ -308,18 +360,18 @@
             <li>A total of 256,438 trips have been registered in 2021.</li>
             <li>Trips made from and to each land use area are described as below:
               <ul>
-                <li><span style="background-color: rgb(255, 0, 0)">Commercial (30.32%)</span></li>
+                <li><span style="color: rgb(255, 0, 0)">Commercial (30.32%)</span></li>
                 <li>
-                  <td><span style="background-color: rgb(26, 255, 255)">Mixed-use (51.78%)</span></td>
+                  <td><span style="color: rgb(26, 255, 255)">Mixed-use (51.78%)</span></td>
                 </li>
                 <li>
-                  <td><span style="background-color: rgb(0, 255, 0)">National Mall (9.88%)</span></td>
+                  <td><span style="color: rgb(0, 255, 0)">National Mall (9.88%)</span></td>
                 </li>
                 <li>
-                  <td><span style="background-color: rgb(255, 0, 255)">Open/Public (3.31%)</span></td>
+                  <td><span style="color: rgb(255, 0, 255)">Open/Public (3.31%)</span></td>
                 </li>
                 <li>
-                  <td><span style="background-color: rgb(255, 255, 0)">Residential (4.71%)</span></td>
+                  <td><span style="color: rgb(255, 255, 0)">Residential (4.71%)</span></td>
                 </li>
               </ul>
             </li>
@@ -327,19 +379,19 @@
               members based on land use types are as follow:
               <ul>
                 <li>
-                  <td><span style="background-color: rgb(255, 0, 0)">Commercial (65.48%)</span></td>
+                  <td><span style="color: rgb(255, 0, 0)">Commercial (65.48%)</span></td>
                 </li>
                 <li>
-                  <td><span style="background-color: rgb(26, 255, 255)">Mixed-use (72.76%)</span></td>
+                  <td><span style="color: rgb(26, 255, 255)">Mixed-use (72.76%)</span></td>
                 </li>
                 <li>
-                  <td><span style="background-color: rgb(0, 255, 0)">National Mall (32.87%)</span></td>
+                  <td><span style="color: rgb(0, 255, 0)">National Mall (32.87%)</span></td>
                 </li>
                 <li>
-                  <td><span style="background-color: rgb(255, 0, 255)">Open/Public (53.97%)</span></td>
+                  <td><span style="color: rgb(255, 0, 255)">Open/Public (53.97%)</span></td>
                 </li>
                 <li>
-                  <td><span style="background-color: rgb(255, 255, 0)">Residential (63.53%)</span></td>
+                  <td><span style="color: rgb(255, 255, 0)">Residential (63.53%)</span></td>
                 </li>
               </ul>
             </li>
@@ -406,8 +458,8 @@
           land use categories and trips made by registered members and casuals users by using the chord graphs and the
           land use map.
           Analyzed the relationship between the number of trips and days for both registered and casual users
-          Edited in html the findings for Question 3 and wrote conclusion. 
-          Prototyped intial histograms in R and contributed to D3 javascript code.  
+          Edited in html the findings for Question 3 and wrote conclusion.
+          Prototyped intial histograms in R and contributed to D3 javascript code.
         </p>
         <h5>Khyati Patel</h5>
         <p>
