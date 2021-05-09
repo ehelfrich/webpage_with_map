@@ -1,9 +1,9 @@
 // Land Use Map
 var land_use_map = L.mapbox.map('land_use_map')
-        .setView([38.896653139857385, -77.03485808499167], 12)
-        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
-      land_use_map
-        .scrollWheelZoom.disable();
+    .setView([38.896653139857385, -77.03485808499167], 12)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+land_use_map
+    .scrollWheelZoom.disable();
 
 d3.json('data/assignment_3/land_use_boundary.geojson', function (error, land_use_json) {
     console.log(land_use_json)
@@ -33,6 +33,20 @@ d3.json('data/assignment_3/land_use_boundary.geojson', function (error, land_use
             }
         }
     }).addTo(land_use_map);
+})
+d3.csv("data/assignment_3/dc_only_trips.csv", function (data) {
+
+    data.forEach(function (row) {
+        row.start_lat = +row.start_lat;
+        row.start_lng = +row.start_lng;
+        var path_options = {
+            radius: 2,
+            color: d3.rgb(3, 252, 3).brighter(),
+            stroke: true,
+            weight: 1,
+        };
+        L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(land_use_map);
+    });
 })
 
 // Member Chord Graph Between Land use Areas
