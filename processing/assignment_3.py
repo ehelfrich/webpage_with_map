@@ -9,6 +9,7 @@ from io import BytesIO
 import time
 import json
 from shapely.geometry import shape, Point
+from sklearn.model_selection import train_test_split
 
 
 def get_data():
@@ -181,6 +182,8 @@ if __name__ == "__main__":
 
     # Drop Non DC Trips
     df_2021 = df_2021.dropna(subset=['start_land_cluster', 'end_land_cluster'])
+    stratified_df, _ = train_test_split(df_2021, train_size=.15, stratify=df_2021[['start_land_cluster']])
+    stratified_df.to_csv('data/assignment_3/dc_only_trips.csv')
 
     # Create Member and Casual Clusters for Question #3
     legend = pd.DataFrame(sorted(df_2021.start_land_cluster.unique()))
