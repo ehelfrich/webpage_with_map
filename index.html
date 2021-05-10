@@ -201,7 +201,7 @@
 
   <div class="container one-bottom">
     <div class="twelve columns">
-      <h3>Aggregate time and distance changes based on rider membership</h3>
+      <h3>Daily behavior pattern differences between members and casual users</h3>
       <p>
         Travel time was calculated by subtracting the end time by the start time. Travel distance was calculated by
         finding the distance between the start and end latitude/longitude points for each ride. This distance was simply
@@ -211,21 +211,56 @@
         These bikes were most likely checked out and then returned to the same station after the user took a circular
         route.
       </p>
+      <h4>Total start-end distance variation</h4>
       <div id="distance_plot"></div>
-      <div id="time_plot"></div>
-      <h4>
-        Findings
-      </h4>
+      <h5>Members</h5>
       <p>
-        First of all, we can see two peaks existing in the ridership of the members both in the first and second graph.
-        That means most of the member users are using the bike sharing service for daily commuting,
-        which causes the volume of the usage to rise at rush hours of the day.
-        In addition, there is a distinct difference of ridership between members and casual users.
-        Member users have a longer distance of rides but a much lower duration than the casual users do for
-        almost the entire range of times. There are two possible reasons behind this.
-        First, member users ride faster than the casual users because the member users are usually in
-        a hurry to work or go home. Second, since casual users are using bikes for leisure purposes,
-        they may take a circular tour path, which leads to a longer time and shorter start-end distances.
+        The total distance keeps lower than 50,000km between 23pm to 5am the next day, then it starts
+        to surge at 6 am and reaches the first peak around 8am. After a slight decline during 9 to 10 am,
+        the total distance starts to rise more and reaches to the second peak around 5pm. In general
+        the total distance of rides in the afternoon are higher than that in the morning. That is either
+        because people in the afternoon use shared bikes to travel to farther destinations or the number
+        of member users increases in the afternoon. Moreover, as the two peaks appear during the rush
+        hours of the day, we can speculate that most of the member users probably use sharing bike
+        service to commute.
+      </p>
+      <h5>Casual users</h5>
+      <p>
+        The total start-end distance for the rides of the casual users are lower than that of the members
+        at any hour of the day. No obvious peak can be seen in the graph and the curve of the profile is
+        much smoother, which suggests that the ridership of the casual users has little to do with the
+        behavior pattern of the commuters. The other thing we can observe is that the distance is higher
+        from 12 to 5 pm than the rest of the day. That means casual users prefer to take rides in the
+        afternoon than in the morning.
+      </p>
+      <h4>Total duration variation</h4>
+      <div id="time_plot"></div>
+      <h5>Members</h5>
+      <p>
+        Unlike the graph of the distance, there is no drastic rise and fall in the duration graph. However,
+        we can still see the connection between the total duration and the total distance: The duration
+        stays low at night and becomes high from 7am to 8pm and the highest point is at 5pm.In
+        addition, the duration of trips in the afternoon is also higher than that in the morning. The
+        similarities and difference between the duration graph and distance graph suggests that the total
+        duration of the trips is to some degree related to the total distance but also impacted by other
+        factors such as traffic conditions, the users riding speed, etc.
+      </p>
+      <h5>Casual users</h5>
+      <p>
+        There is a sharp increase of total duration at 10 am, and it reaches to the highest level between
+        1 to 4pm. What’s more, opposite to the distance graph, the total duration of casual users is
+        significantly higher than that of members. The reason behind this is unknown, but it may
+        probably be due to the purpose of the trips of casual users. For instance, if the casual users are
+        riding the bikes mostly for leisure purposes, the trips may be slow and circulating, which leads to
+        a longer duration and shorter start-end distance. We may need other types of data to further
+        testify this hypothesis.
+      </p>
+      <h5>Impact</h5>
+      <p>
+        We see that membership does make a difference when looking at aggregate travel distances and times.
+        Knowing these differences in behviour patterns between members and non-members can help target how the
+        two different populations are using the bikeshare program. This can be used to help target new members and
+        refine the structure of memberships to increase revenue.
       </p>
     </div>
   </div>
